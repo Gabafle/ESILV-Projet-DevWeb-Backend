@@ -1,2 +1,6 @@
 # node project
--# Authors : Hugo LISIECKI, Gabriel PETER, Mickaël TALIDEC
+
+***
+Authors : Hugo LISIECKI, Gabriel PETER, Mickaël TALIDEC
+
+***
