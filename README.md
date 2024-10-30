@@ -1,1 +1,2 @@
-# ESILV-Projet-DevWeb-Backend-Peter-Gabriel-Talidec-Micka-l-Lisiecki-Hugo
+# node project
+-# Authors : Hugo LISIECKI, Gabriel PETER, Mickaël TALIDEC
