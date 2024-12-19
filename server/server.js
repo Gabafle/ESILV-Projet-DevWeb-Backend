@@ -10,6 +10,9 @@ app.use('/auth', require('./routes/auth'));
 // Routes pour les articles
 app.use('/articles', require('./routes/articles'));
 
+// Routes pour les magasins
+app.use('/shop',require('./routes/shop'));
+
 // Middleware de gestion des erreurs
 app.use((error, req, res, next) => {
   console.error(error);
