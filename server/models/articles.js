@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db/connection');
+const sequelize = require('./db');
 
 const Article = sequelize.define('Article', {
   title: {
@@ -15,10 +15,10 @@ const Article = sequelize.define('Article', {
     allowNull: false,
   },
   price: {
-    type: DataTypes.DECIMAL(10, 2), 
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     validate: {
-      min: 0, 
+      min: 0,
     },
   },
   quantity: {
@@ -26,7 +26,7 @@ const Article = sequelize.define('Article', {
     allowNull: false,
     defaultValue: 0,
     validate: {
-      min: 0, 
+      min: 0,
     },
   },
 });

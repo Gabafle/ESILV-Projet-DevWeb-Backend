@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // Routes pour l'authentification
-app.use('/auth', require('./routes/auth'));
+app.use(require("./routes/security"));
 
 // Routes pour les articles
 app.use('/articles', require('./routes/articles'));
