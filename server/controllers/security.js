@@ -21,10 +21,10 @@ module.exports = {
     }
 
     const token = jwt.sign(
-      {
-        id: user.id,
-      },
-      process.env.JWT_SECRET ?? "MyVeryVeryVeryFormidableSecret&1L1kE17"
+        {
+          id: user.id,
+        },
+        process.env.JWT_SECRET ?? "MyVeryVeryVeryFormidableSecret&1L1kE17"
     );
 
     res.json({

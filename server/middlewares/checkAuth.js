@@ -13,8 +13,8 @@ module.exports = async (req, res, next) => {
 
   try {
     const payload = jwt.verify(
-      token,
-      process.env.JWT_SECRET ?? "MyVeryVeryVeryFormidableSecret&1L1kE17"
+        token,
+        process.env.JWT_SECRET ?? "MyVeryVeryVeryFormidableSecret&1L1kE17"
     );
 
     req.user = await User.findByPk(payload.id);
