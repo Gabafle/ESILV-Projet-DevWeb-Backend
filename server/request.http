@@ -1,6 +1,5 @@
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzMwOTY5OTE3fQ.c_iz3nB96MwGn0RRpkJ6iqQokzA7Xx1htCWIeeQS7LI
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzM0NzE1MzU5fQ.ph95a1yFpei1mupCFaHfPJleH09Faonk1QUwUNIXOfg
 ###
 POST http://localhost:3000/users
 content-type: application/json
@@ -29,36 +28,44 @@ DELETE http://localhost:3000/users/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMwOTY3NjI3fQ.JAKRfMzjGgt8iQM6UPz6VPNObl8NtRUuOPCXmsm8QQo
 
 ###
-GET http://localhost:3000/animals
-
-###
-POST http://localhost:3000/animals
-content-type: application/json
-
-{
-    "name": "Jane Doe",
-    "race": "Chien"
-}
-
-###
-PATCH http://localhost:3000/animals/1
-content-type: application/json
-
-{
-    "race": "Chat",
-}
-
-###
-GET http://localhost:3000/animals/1
-
-###
-DELETE http://localhost:3000/animals/1
-
-###
 POST http://localhost:3000/login
 content-type: application/json
 
 {
     "email": "jane@doe.pt",
-    "password": "1990-01-01"
+    "password": "123456azAZ!ç"
+}
+
+
+
+
+
+###
+POST http://localhost:3000/articles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzM0NzE1MzU5fQ.ph95a1yFpei1mupCFaHfPJleH09Faonk1QUwUNIXOfg
+content-type: application/json
+
+{
+    "title": "Casque Gaming Pro",
+    "content": "Casque de gaming avec son surround et microphone à réduction de bruit",
+    "price": 149.99,
+    "quantity": 120
+}
+
+###
+POST http://localhost:3000/shop
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzM0NzE1MzU5fQ.ph95a1yFpei1mupCFaHfPJleH09Faonk1QUwUNIXOfg
+content-type: application/json
+
+{
+    "name": "Tech Haven",
+    "description": "Un magasin spécialisé dans les gadgets technologiques dernier cri.",
+    "address": "123 Boulevard des Technologies, Paris",
+    "avis": "Excellent service et produits de qualité",
+    "note": 5,
+    "articles": [
+        {"id": 1, "title": "Casque VR", "quantity": 50},
+        {"id": 2, "title": "Clavier mécanique", "quantity": 30}
+    ],
+    "owner": 5
 }
