@@ -1,34 +1,39 @@
 const {DataTypes} = require('sequelize');
-const sequelize = require('../db/connection');
+const sequelize = require('./db');
 const user = require('../models/user');
+const connection = require("./db");
 
 const Shop = sequelize.define("Shop", {
     name: {
-        TYPE: String,
+        type: String,
         defaultValue: "NewShop",
         allowNull: false,
     },
     description: {
-        TYPE: String,
+        type: String,
         defaultValue: "",
     },
-    address: { TYPE: String,
+    address: {
+        type: String,
         defaultValue: "Sweet Home Alabama",
     },
     avis: {
-        TYPE: String,
+        type: String,
         defaultValue: "",
     },
     note: {
-        TYPE: Number,
+        type: Number,
         defaultValue: 0,
     },
     articles: {
-        TYPE: Array,
+        type: Array,
         defaultValue: [],
     },
     owner: {
-        TYPE: user,
+        type: user,
         defaultValue: null,
     },
+
 })
+
+module.exports = Shop;
