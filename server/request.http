@@ -67,5 +67,5 @@ content-type: application/json
         {"id": 1, "title": "Casque VR", "quantity": 50},
         {"id": 2, "title": "Clavier mécanique", "quantity": 30}
     ],
-    "owner": 5
+    "owner": "PETER GABRIEL"
 }
