@@ -1,10 +1,10 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('./db');
-const user = require('../models/user');
+const user = require('./user');
 
 const Order = sequelize.define(
 	"Order", {
-		client: {
+		clientID: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},

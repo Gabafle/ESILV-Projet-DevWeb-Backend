@@ -2,9 +2,9 @@ const { Order } = require('../models/order');
 
 exports.post = async (req, res) => {
 	try {
-		const { client, status, articles, totalPrice } = req.body;
+		const { clientID, status, articles, totalPrice } = req.body;
 		const newOrder = await Order.create({
-			client,
+			clientID,
 			status,
 			articles,
 			totalPrice,
@@ -22,10 +22,10 @@ exports.get = async (req, res) => {
 		const order = await Order.findByPk(id);
 		if (!order)
 			return res.status(404).json({ message: "Order not found" });
-		if (order.client !== req.user.id)
+		if (order.clientID !== req.user.id)
 			return res.status(403).json({error: 'Unauthorized'});
 		res.json(order);
-		
+
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: "Failed to fetch order." });
@@ -49,7 +49,7 @@ exports.patch = async (req, res) => {
 		const order = await Order.findByPk(id);
 		if (!order)
 	 		return res.status(404).json({ message: "Order not found" });
-		if (order.client !== req.user.id) 
+		if (order.clientID !== req.user.id) 
 			return res.status(403).json({error: 'Unauthorized'});
 		await order.update({
 			articles,
@@ -68,7 +68,7 @@ exports.delete = async (req, res) => {
 		const order = await Order.findByPk(id);
 		if (!order)
 			return res.status(404).json({ message: 'Order not found' });
-		if (order.client !== req.user.id)
+		if (order.clientID !== req.user.id)
 			return res.status(403).json({error: 'Unauthorized'});
 		await order.destroy();
 		res.status(204).send();
