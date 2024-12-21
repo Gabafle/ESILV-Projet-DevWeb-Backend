@@ -1,6 +1,6 @@
 const Article = require("../models/articles");
 
-exports.cget = async (req, res, next) => {
+exports.cget = async (req, res) => {
     try {
         const articles = await Article.findAll();
         res.json(articles);
@@ -10,7 +10,7 @@ exports.cget = async (req, res, next) => {
     }
 };
 
-exports.get = async (req, res, next) => {
+exports.get = async (req, res) => {
     try {
         const article = await Article.findByPk(req.params.id);
         if (!article) {
@@ -23,7 +23,7 @@ exports.get = async (req, res, next) => {
     }
 };
 
-exports.post = async (req, res, next) => {
+exports.post = async (req, res) => {
     const {title, content, price, quantity} = req.body;
     const authorId = req.user.id; // Récupéré du token JWT
     try {
@@ -35,7 +35,7 @@ exports.post = async (req, res, next) => {
     }
 };
 
-exports.patch = async (req, res, next) => {
+exports.patch = async (req, res) => {
     const {title, content, price, quantity} = req.body;
     try {
         const article = await Article.findByPk(req.params.id);
@@ -53,7 +53,7 @@ exports.patch = async (req, res, next) => {
     }
 };
 
-exports.delete = async (req, res, next) => {
+exports.delete = async (req, res) => {
     try {
         const article = await Article.findByPk(req.params.id);
         if (!article) {
