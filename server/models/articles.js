@@ -1,43 +1,43 @@
-const { DataTypes } = require('sequelize');
+const {DataTypes} = require('sequelize');
 const sequelize = require('./db');
 
 const Article = sequelize.define('Article', {
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  authorId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  price: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: false,
-    validate: {
-      min: 0,
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
-  },
-  quantity: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-    validate: {
-      min: 0,
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
-  },
+    authorId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        validate: {
+            min: 0,
+        },
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+            min: 0,
+        },
+    },
 });
 
 async function syncDatabase() {
-  try {
-    await sequelize.sync({ force: false });
-    console.log('Database synced successfully!');
-  } catch (error) {
-    console.error('Error syncing database:', error);
-  }
+    try {
+        await sequelize.sync({force: false});
+        console.log('Database synced successfully!');
+    } catch (error) {
+        console.error('Error syncing database:', error);
+    }
 }
 
 syncDatabase();
