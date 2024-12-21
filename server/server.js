@@ -18,6 +18,8 @@ app.use("/articles", articleRoutes);
 const shopRoutes = require("./routes/shop");
 app.use("/shop", shopRoutes);
 
+const orderRoutes = require("./routes/order");
+app.use("/order", orderRoutes);
 
 app.use(
     /** only user routes are protected **/ /*checkAuth,*/ require("./routes/users")
