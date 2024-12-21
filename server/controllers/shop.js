@@ -1,6 +1,5 @@
 const Shop = require('../models/Shop');
 
-
 exports.getAll = async (req, res) => {
     try {
         const shops = await Shop.findAll();
@@ -14,7 +13,6 @@ exports.getAll = async (req, res) => {
 exports.post = async (req, res) => {
     const {name, description, address, avis, note, articles, owner} = req.body;
     try {
-        // Créer un magasin avec les informations envoyées
         const shop = await Shop.create({
             name,
             description,
@@ -34,7 +32,6 @@ exports.post = async (req, res) => {
 exports.patch = async (req, res) => {
     const {id} = req.params;
     const {name, description, address, avis, note, articles} = req.body;
-
     try {
         const shop = await Shop.findByPk(id);
 
@@ -42,7 +39,6 @@ exports.patch = async (req, res) => {
             return res.status(404).json({error: 'Shop not found'});
         }
 
-        // Vérification pour assurer que seul le propriétaire peut modifier son magasin
         if (shop.owner !== req.user.id) {
             return res.status(403).json({error: 'Unauthorized'});
         }
@@ -57,7 +53,6 @@ exports.patch = async (req, res) => {
 
 exports.delete = async (req, res) => {
     const {id} = req.params;
-
     try {
         const shop = await Shop.findByPk(id);
 
@@ -65,7 +60,6 @@ exports.delete = async (req, res) => {
             return res.status(404).json({error: 'Shop not found'});
         }
 
-        // Vérifier si l'utilisateur est le propriétaire du magasin
         if (shop.owner !== req.user.id) {
             return res.status(403).json({error: 'Unauthorized'});
         }
@@ -81,7 +75,6 @@ exports.delete = async (req, res) => {
 
 exports.get = async (req, res) => {
     const {id} = req.params;
-
     try {
         const shop = await Shop.findByPk(id);
         if (!shop) {
