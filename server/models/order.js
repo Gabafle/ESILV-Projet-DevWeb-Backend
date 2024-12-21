@@ -19,15 +19,13 @@ const Order = sequelize.define(
 			defaultValue: {},
 			validate: {
 				isValidDictionary(value) {
-		            if (typeof value !== 'object' || Array.isArray(value)) {
-		              throw new Error('Articles must be a valid key-value dictionary');
-		            }
+		            if (typeof value !== 'object' || Array.isArray(value))
+						throw new Error('Articles must be a valid key-value dictionary');
 		            for (const [key, val] of Object.entries(value)) {
-		              if (!key || typeof val !== 'number' || val < 1) {
-		                throw new Error(
-		                  `Invalid entry: Key=${key}, Value=${val}. Keys must be valid and values must be numbers >= 1.`
-		                );
-		              }
+						if (!key || typeof val !== 'number' || val < 1)
+							throw new Error(
+								`Invalid entry: Key=${key}, Value=${val}. Keys must be valid and values must be numbers >= 1.`
+							);
 		            }
 		          },
 			}
