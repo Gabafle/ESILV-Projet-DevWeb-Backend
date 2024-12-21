@@ -28,7 +28,7 @@ const Shop = sequelize.define("Shop", {
         defaultValue: [],
     },
     owner: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
     },
 }, {
