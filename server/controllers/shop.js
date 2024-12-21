@@ -1,26 +1,95 @@
+const Shop = require('../models/Shop');
 
-class ShopController {
-    static async getAll(req, res) {
 
-        res.send('Récupérer tous les shops');
-    }
-
-    static async post(req, res) {
-        res.send('Créer un nouveau shop');
-    }
-
-    static async get(req, res) {
-        res.send(`Récupérer le shop avec l'ID ${req.params.id}`);
-    }
-
-    static async patch(req, res) {
-
-        res.send(`Mettre à jour le shop avec l'ID ${req.params.id}`);
-    }
-
-    static async delete(req, res) {
-        res.send(`Supprimer le shop avec l'ID ${req.params.id}`);
+exports.getAll = async (req, res) => {
+    try {
+        const shops = await Shop.findAll();
+        res.json(shops);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Failed to fetch shops.'});
     }
 }
 
-module.exports = ShopController;
+exports.post = async (req, res) => {
+    const {name, description, address, avis, note, articles, owner} = req.body;
+    try {
+        // Créer un magasin avec les informations envoyées
+        const shop = await Shop.create({
+            name,
+            description,
+            address,
+            avis,
+            note,
+            articles,
+            owner
+        });
+        res.status(201).json(shop);
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({error: 'Failed to create shop.'});
+    }
+}
+
+exports.patch = async (req, res) => {
+    const {id} = req.params;
+    const {name, description, address, avis, note, articles} = req.body;
+
+    try {
+        const shop = await Shop.findByPk(id);
+
+        if (!shop) {
+            return res.status(404).json({error: 'Shop not found'});
+        }
+
+        // Vérification pour assurer que seul le propriétaire peut modifier son magasin
+        if (shop.owner !== req.user.id) {
+            return res.status(403).json({error: 'Unauthorized'});
+        }
+
+        await shop.update({name, description, address, avis, note, articles});
+        res.json(shop);
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({error: 'Failed to update shop. Check your input.'});
+    }
+}
+
+exports.delete = async (req, res) => {
+    const {id} = req.params;
+
+    try {
+        const shop = await Shop.findByPk(id);
+
+        if (!shop) {
+            return res.status(404).json({error: 'Shop not found'});
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du magasin
+        if (shop.owner !== req.user.id) {
+            return res.status(403).json({error: 'Unauthorized'});
+        }
+
+        await shop.destroy();
+        res.status(204).send();
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Failed to delete shop.'});
+    }
+
+}
+
+exports.get = async (req, res) => {
+    const {id} = req.params;
+
+    try {
+        const shop = await Shop.findByPk(id);
+        if (!shop) {
+            return res.status(404).json({error: 'Shop not found'});
+        }
+        res.json(shop);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: 'Failed to fetch shop.'});
+    }
+}
